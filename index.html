@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaTask | Advanced To-Do App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fas fa-rocket"></i>
+                <span>NovaTask</span>
+            </div>
+            <div class="menu">
+                <div class="menu-item active" data-view="inbox">
+                    <i class="fas fa-inbox"></i>
+                    <span>Inbox</span>
+                </div>
+                <div class="menu-item" data-view="today">
+                    <i class="fas fa-calendar-day"></i>
+                    <span>Today</span>
+                </div>
+                <div class="menu-item" data-view="upcoming">
+                    <i class="fas fa-calendar-week"></i>
+                    <span>Upcoming</span>
+                </div>
+                <div class="menu-item" data-view="completed">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Completed</span>
+                </div>
+                <div class="projects-header">
+                    <span>PROJECTS</span>
+                    <button id="addProjectBtn"><i class="fas fa-plus"></i></button>
+                </div>
+                <div class="projects-list" id="projectsList">
+                    <!-- Projects will be added here dynamically -->
+                </div>
+            </div>
+            <div class="user-profile">
+                <div class="avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <span class="username">User</span>
+                    <span class="email">karankumar21965@gmail.com.</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-content">
+            <div class="header">
+                <h1 id="viewTitle">Inbox</h1>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search tasks...">
+                </div>
+                <div class="view-actions">
+                    <button id="sortBtn"><i class="fas fa-sort"></i> Sort</button>
+                    <button id="filterBtn"><i class="fas fa-filter"></i> Filter</button>
+                </div>
+            </div>
+            
+            <div class="task-input-container">
+                <input type="text" id="taskInput" placeholder="Add a new task...">
+                <button id="addTaskBtn"><i class="fas fa-plus"></i></button>
+                <div class="quick-actions">
+                    <button class="quick-action-btn" data-action="date"><i class="far fa-calendar"></i></button>
+                    <button class="quick-action-btn" data-action="priority"><i class="fas fa-flag"></i></button>
+                    <button class="quick-action-btn" data-action="project"><i class="fas fa-tag"></i></button>
+                </div>
+            </div>
+            
+            <div class="tasks-container" id="tasksContainer">
+                <!-- Tasks will be added here dynamically -->
+            </div>
+            
+            <!-- Task Detail Modal -->
+            <div class="modal" id="taskDetailModal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2 id="modalTaskTitle">Task Details</h2>
+                    <div class="modal-body">
+                        <div class="detail-section">
+                            <label>Description</label>
+                            <textarea id="taskDescription" placeholder="Add detailed description..."></textarea>
+                        </div>
+                        <div class="detail-section">
+                            <label>Due Date</label>
+                            <input type="datetime-local" id="taskDueDate">
+                        </div>
+                        <div class="detail-section">
+                            <label>Priority</label>
+                            <select id="taskPriority">
+                                <option value="low">Low</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="high">High</option>
+                            </select>
+                        </div>
+                        <div class="detail-section">
+                            <label>Project</label>
+                            <select id="taskProject">
+                                <!-- Projects will be added here dynamically -->
+                            </select>
+                        </div>
+                        <div class="detail-section">
+                            <label>Subtasks</label>
+                            <div class="subtasks-container" id="subtasksContainer">
+                                <!-- Subtasks will be added here dynamically -->
+                            </div>
+                            <div class="add-subtask">
+                                <input type="text" id="subtaskInput" placeholder="Add a subtask...">
+                                <button id="addSubtaskBtn"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="saveTaskBtn">Save Changes</button>
+                        <button id="deleteTaskBtn" class="delete-btn">Delete Task</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project Modal -->
+            <div class="modal" id="projectModal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Add New Project</h2>
+                    <div class="modal-body">
+                        <div class="detail-section">
+                            <label>Project Name</label>
+                            <input type="text" id="projectName" placeholder="Enter project name...">
+                        </div>
+                        <div class="detail-section">
+                            <label>Color</label>
+                            <div class="color-picker">
+                                <div class="color-option" data-color="#FF9E9E" style="background-color: #FF9E9E;"></div>
+                                <div class="color-option" data-color="#FFD6A5" style="background-color: #FFD6A5;"></div>
+                                <div class="color-option" data-color="#FDFFB6" style="background-color: #FDFFB6;"></div>
+                                <div class="color-option" data-color="#CAFFBF" style="background-color: #CAFFBF;"></div>
+                                <div class="color-option" data-color="#9BF6FF" style="background-color: #9BF6FF;"></div>
+                                <div class="color-option" data-color="#A0C4FF" style="background-color: #A0C4FF;"></div>
+                                <div class="color-option" data-color="#BDB2FF" style="background-color: #BDB2FF;"></div>
+                                <div class="color-option" data-color="#FFC6FF" style="background-color: #FFC6FF;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="saveProjectBtn">Create Project</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
